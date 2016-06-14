@@ -98,6 +98,8 @@ class XLSheet(SheetReader):
         elif cell_type == xlrd.XL_CELL_NUMBER and self.auto_detect_int:
             if is_integer_ok_for_xl_float(value):
                 value = int(value)
+        if cell_type == xlrd.XL_CELL_ERROR:
+            value = xlrd.error_text_from_code[value]
         return value
 
     def to_array(self):
