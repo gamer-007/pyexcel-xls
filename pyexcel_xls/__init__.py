@@ -104,6 +104,8 @@ class XLSheet(SheetReader):
         value = self.native_sheet.cell_value(row, column)
         if my_type == datetime.datetime:
             value = xldate_to_python_date(value)
+        if cell_type == xlrd.XL_CELL_ERROR:
+            value = xlrd.error_text_from_code[value]
         return value
 
 
